@@ -1,42 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camel_to_snake.c                                   :+:      :+:    :+:   */
+/*   do_op.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lprieure <lprieure@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/25 19:17:33 by lprieure          #+#    #+#             */
-/*   Updated: 2023/02/26 19:05:10 by lprieure         ###   ########.fr       */
+/*   Created: 2023/02/26 14:51:23 by lprieure          #+#    #+#             */
+/*   Updated: 2023/02/26 15:01:42 by lprieure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-void	camel_to_snake(char *str)
+void	do_op(int nb1, int nb2, char operator)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-		{
-			write(1, "_", 1);
-			str[i] += 32;
-		}
-		write(1, &str[i], 1);
-		i++;
-	}
-	write(1, "\n", 1);
+	if (operator == '+')
+		printf("%d\n", nb1 + nb2);
+	else if (operator == '-')
+		printf("%d\n", nb1 - nb2);
+	else if (operator == '*')
+		printf("%d\n", nb1 * nb2);
+	else if (operator == '/')
+		printf("%d\n", nb1 / nb2);
+	else if (operator == '%')
+		printf("%d\n", nb1 % nb2);
 }
 
 int	main(int argc, char **argv)
 {
-	if (argc != 2)
+	if (argc != 4)
 	{
-		write(1, "\n", 1);
+		printf("\n");
 		return (1);
 	}
-	camel_to_snake(argv[1]);
+	do_op(atoi(argv[1]), atoi(argv[3]), argv[2][0]);
 	return (0);
 }

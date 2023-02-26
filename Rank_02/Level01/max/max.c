@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camel_to_snake.c                                   :+:      :+:    :+:   */
+/*   max.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lprieure <lprieure@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/25 19:17:33 by lprieure          #+#    #+#             */
-/*   Updated: 2023/02/26 19:05:10 by lprieure         ###   ########.fr       */
+/*   Created: 2023/02/26 18:41:03 by lprieure          #+#    #+#             */
+/*   Updated: 2023/02/26 18:49:36 by lprieure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	camel_to_snake(char *str)
+int	max(int *tab, unsigned int len)
 {
-	int	i;
+	unsigned int	i;
+	int				max;
 
+	if (len == 0)
+		return (0);
 	i = 0;
-	while (str[i])
+	max = tab[0];
+	while (i < len)
 	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-		{
-			write(1, "_", 1);
-			str[i] += 32;
-		}
-		write(1, &str[i], 1);
+		if (max < tab[i])
+			max = tab[i];
 		i++;
 	}
-	write(1, "\n", 1);
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc != 2)
-	{
-		write(1, "\n", 1);
-		return (1);
-	}
-	camel_to_snake(argv[1]);
-	return (0);
+	return (max);
 }

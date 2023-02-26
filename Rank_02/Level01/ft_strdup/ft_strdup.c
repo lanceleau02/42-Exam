@@ -1,42 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camel_to_snake.c                                   :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lprieure <lprieure@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/25 19:17:33 by lprieure          #+#    #+#             */
-/*   Updated: 2023/02/26 19:05:10 by lprieure         ###   ########.fr       */
+/*   Created: 2023/02/26 16:02:05 by lprieure          #+#    #+#             */
+/*   Updated: 2023/02/26 17:43:37 by lprieure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
 
-void	camel_to_snake(char *str)
+int	ft_strlen(char *str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
-	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-		{
-			write(1, "_", 1);
-			str[i] += 32;
-		}
-		write(1, &str[i], 1);
 		i++;
-	}
-	write(1, "\n", 1);
+	return (i);
 }
 
-int	main(int argc, char **argv)
+char	*ft_strdup(char *src)
 {
-	if (argc != 2)
+	char	*dest;
+	int		i;
+
+	dest = malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (dest == NULL)
+		return (NULL);
+	i = 0;
+	while (src[i])
 	{
-		write(1, "\n", 1);
-		return (1);
+		dest[i] = src[i];
+		i++;
 	}
-	camel_to_snake(argv[1]);
-	return (0);
+	dest[i] = '\0';
+	return (dest);
 }

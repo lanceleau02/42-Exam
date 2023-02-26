@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camel_to_snake.c                                   :+:      :+:    :+:   */
+/*   ft_strcspn.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lprieure <lprieure@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/25 19:17:33 by lprieure          #+#    #+#             */
-/*   Updated: 2023/02/26 19:05:10 by lprieure         ###   ########.fr       */
+/*   Created: 2023/02/26 15:49:27 by lprieure          #+#    #+#             */
+/*   Updated: 2023/02/26 16:01:27 by lprieure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	camel_to_snake(char *str)
+size_t  ft_strcspn(const char *s, const char *reject)
 {
-	int	i;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	while (str[i])
+	while (s[i])
 	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
+		j = 0;
+		while (reject[j])
 		{
-			write(1, "_", 1);
-			str[i] += 32;
+			if (reject[j] == s[i])
+				return (i);
+			j++;
 		}
-		write(1, &str[i], 1);
 		i++;
 	}
-	write(1, "\n", 1);
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc != 2)
-	{
-		write(1, "\n", 1);
-		return (1);
-	}
-	camel_to_snake(argv[1]);
-	return (0);
+	return (i);
 }

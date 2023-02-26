@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camel_to_snake.c                                   :+:      :+:    :+:   */
+/*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lprieure <lprieure@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/25 19:17:33 by lprieure          #+#    #+#             */
-/*   Updated: 2023/02/26 19:05:10 by lprieure         ###   ########.fr       */
+/*   Created: 2023/02/26 17:44:23 by lprieure          #+#    #+#             */
+/*   Updated: 2023/02/26 18:07:42 by lprieure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	camel_to_snake(char *str)
+char	*ft_strchr(const char *s, int c)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (s[i] != (unsigned char)c)
 	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-		{
-			write(1, "_", 1);
-			str[i] += 32;
-		}
-		write(1, &str[i], 1);
+		if (s[i] == '\0')
+			return (NULL);
+		i++;
+	}
+	return ((char *)&s[i]);
+}
+
+void	inter(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i])
+	{
+		if (ft_strchr(s2, s1[i]) != NULL && ft_strchr(s1, s1[i]) == s1 + i)
+			write(1, &s1[i], 1);
 		i++;
 	}
 	write(1, "\n", 1);
@@ -32,11 +42,11 @@ void	camel_to_snake(char *str)
 
 int	main(int argc, char **argv)
 {
-	if (argc != 2)
+	if (argc != 3)
 	{
 		write(1, "\n", 1);
 		return (1);
 	}
-	camel_to_snake(argv[1]);
+	inter(argv[1], argv[2]);
 	return (0);
 }

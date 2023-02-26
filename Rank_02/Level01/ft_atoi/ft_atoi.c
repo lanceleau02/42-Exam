@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camel_to_snake.c                                   :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lprieure <lprieure@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/25 19:17:33 by lprieure          #+#    #+#             */
-/*   Updated: 2023/02/26 19:05:10 by lprieure         ###   ########.fr       */
+/*   Created: 2023/02/26 15:04:07 by lprieure          #+#    #+#             */
+/*   Updated: 2023/02/26 15:12:43 by lprieure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	camel_to_snake(char *str)
+int	ft_atoi(const char *str)
 {
 	int	i;
+	int	sign;
+	int	nbr;
 
 	i = 0;
-	while (str[i])
+	sign = 1;
+	if (str[i] == '-')
 	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-		{
-			write(1, "_", 1);
-			str[i] += 32;
-		}
-		write(1, &str[i], 1);
+		sign *= -1;
 		i++;
 	}
-	write(1, "\n", 1);
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc != 2)
+	nbr = 0;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		write(1, "\n", 1);
-		return (1);
+		nbr = (nbr * 10) + (str[i] - '0');
+		i++;
 	}
-	camel_to_snake(argv[1]);
-	return (0);
+	nbr = nbr * sign;
+	return (nbr);
 }
