@@ -1,46 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hidenp.c                                           :+:      :+:    :+:   */
+/*   pgcd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laprieur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 16:45:39 by laprieur          #+#    #+#             */
-/*   Updated: 2023/03/03 12:16:14 by laprieur         ###   ########.fr       */
+/*   Created: 2023/03/03 13:59:47 by laprieur          #+#    #+#             */
+/*   Updated: 2023/03/03 14:11:12 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-void	hidenp(char *s1, char *s2)
+void	pgcd(int a, int b)
 {
-	int	i;
-	int	j;
+	int	pgcd;
 
-	i = 0;
-	j = 0;
-	while (s1[i])
+	if (a > b)
+		pgcd = a;
+	else
+		pgcd = b;
+	while (1)
 	{
-		while (s2[j] && s1[i] != s2[j])
-			j++;
-		if (s2[j] == '\0')
+		if (a % pgcd == 0 && b % pgcd == 0)
 		{
-			write(1, "0\n", 2);
+			printf("%d\n", pgcd);
 			return ;
 		}
-		i++;
-		j++;
+		pgcd--;
 	}
-	write(1, "1\n", 2);
 }
 
 int	main(int argc, char **argv)
 {
 	if (argc != 3)
 	{
-		write(1, "\n", 1);
+		printf("\n");
 		return (1);
 	}
-	hidenp(argv[1], argv[2]);
+	pgcd(atoi(argv[1]), atoi(argv[2]));
 	return (0);
 }

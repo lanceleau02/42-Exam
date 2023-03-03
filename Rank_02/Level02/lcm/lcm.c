@@ -1,46 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hidenp.c                                           :+:      :+:    :+:   */
+/*   lcm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laprieur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 16:45:39 by laprieur          #+#    #+#             */
-/*   Updated: 2023/03/03 12:16:14 by laprieur         ###   ########.fr       */
+/*   Created: 2023/03/03 12:20:49 by laprieur          #+#    #+#             */
+/*   Updated: 2023/03/03 12:28:28 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	hidenp(char *s1, char *s2)
+unsigned int	lcm(unsigned int a, unsigned int b)
 {
-	int	i;
-	int	j;
+	unsigned int	lcm;
 
-	i = 0;
-	j = 0;
-	while (s1[i])
+	if (a == 0 || b == 0)
+		return (0);
+	if (a > b)
+		lcm = a;
+	else
+		lcm = b;
+	while (1)
 	{
-		while (s2[j] && s1[i] != s2[j])
-			j++;
-		if (s2[j] == '\0')
-		{
-			write(1, "0\n", 2);
-			return ;
-		}
-		i++;
-		j++;
+		if (lcm % a == 0 && lcm % b == 0)
+			return (lcm);
+		lcm++;
 	}
-	write(1, "1\n", 2);
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc != 3)
-	{
-		write(1, "\n", 1);
-		return (1);
-	}
-	hidenp(argv[1], argv[2]);
-	return (0);
 }
