@@ -6,7 +6,7 @@
 /*   By: lprieure <lprieure@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:07:01 by lprieure          #+#    #+#             */
-/*   Updated: 2023/03/05 13:07:07 by lprieure         ###   ########.fr       */
+/*   Updated: 2023/03/07 14:32:52 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,4 @@
 
 char	*get_next_line(int fd);
 
-#endif
+# endif

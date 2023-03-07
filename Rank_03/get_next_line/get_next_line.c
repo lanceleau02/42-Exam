@@ -3,83 +3,91 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lprieure <lprieure@student.42angouleme.fr  +#+  +:+       +#+        */
+/*   By: laprieur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/05 12:01:16 by lprieure          #+#    #+#             */
-/*   Updated: 2023/03/06 17:02:24 by laprieur         ###   ########.fr       */
+/*   Created: 2023/03/07 14:06:19 by laprieur          #+#    #+#             */
+/*   Updated: 2023/03/07 16:39:38 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_strlen(char *str)
+#include "get_next_line.h"
+
+char	*ft_strcpy(char *dest, char *src)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-static char	*ft_strjoin(const char *s1, const char *s2)
-{
-	char	*new_s;
-	int		i;
-	int		j;
-
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	new_s = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (new_s == NULL)
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	while (src[i] && src[i] != '\n')
 	{
-		new_s[i] = s1[i];
+		dest[i] = src[i];
 		i++;
 	}
-	j = 0;
-	while (s2[j])
-	{
-		new_s[i] = s2[j];
-		i++;
-		j++;
-	}
-	new_s[i] = '\0';
-	return (new_s);
-}
-
-static int	ft_check_line(char *line)
-{
-	
+	dest[i] = '\0';
+	return (dest);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	/*static char	*buffer = NULL;
 	char		*line;
-	ssize_t		readed_bytes;
+	ssize_t		read_bytes;
+	static int	i;
+	int	j = 0;
+	static int	flip = 0;
 
-	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
-		return (NULL);
-	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (buffer = NULL)
-		return (NULL);
-	while (1)
+	if (!buffer)
 	{
-		line = ft_strjoin(line, buffer);
-		if (ft_check_line(line) == 1)
-			return (line);
-		readed_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (readed_bytes < 1)
-		{
-			free (buffer);
-			buffer = NULL;
-			if (line[0] != '\0')
-				return (line);
-			free (line);
-			line = NULL;
-			return (NULL);
-		}
-		buffer[readed_bytes] = '\0';
+		buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+		read_bytes = read(fd, buffer, BUFFER_SIZE);
+		buffer[read_bytes] = '\0';
 	}
+	while (buffer[i] != '\0' && buffer[i] != '\n')
+	{
+		j++;
+		i++;
+	}
+	i++;
+	line = malloc(sizeof(char) * j + 1);
+	line = ft_strcpy(line, &buffer[flip]);
+	flip = i;
+	return (line);*/
+
+	char	*buffer;
+	static char	*line = NULL;
+	ssize_t		read_bytes;
+
+	read_bytes = BUFFER_SIZE;
+	while (read_bytes == BUFFER_SIZE && line[i] != '\n')
+	{
+		if (!buffer)
+		{
+			buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+			read_bytes = read(fd, buffer, BUFFER_SIZE);
+			buffer[read_bytes] = '\0';
+		}
+		line = join buffer et line
+		i++;
+	}
+}
+
+#include <stdio.h>
+#include <fcntl.h>
+
+int main(void)
+{
+	int		fd;
+	int		i = 1;
+	char	*line;
+
+	fd = open("test.txt", O_RDONLY);
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("%s", line);
+		free(line);
+		line = NULL;
+		i++;
+	}
+	printf("%s", line);
+	free(line);
+	return(0);
 }
