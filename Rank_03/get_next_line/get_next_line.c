@@ -1,93 +1,129 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: laprieur <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 14:06:19 by laprieur          #+#    #+#             */
-/*   Updated: 2023/03/07 16:39:38 by laprieur         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
 
-char	*ft_strcpy(char *dest, char *src)
+int	ft_strlen(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (src[i] && src[i] != '\n')
+	while (str && str[i])
+		i++;
+	return (i);
+}
+
+int	nl_idx(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (-2);
+	while (str && str[i] && str[i] != '\n')
+		i++;
+	if (str[i] == '\0')
+		return (-1);
+	return (i);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
+	if (!str)
+		return (NULL);
+	while (s1 && s1[i])
 	{
-		dest[i] = src[i];
+		str[i] = s1[i];
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	while (s2[j])
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	if (s1)
+		free(s1);
+	return (str);
+}
+
+char	*clear_and_return(char *line, int code)
+{
+	int		i;
+	int		nl;
+	char	*out;
+
+	i = 0;
+	nl = nl_idx(line);
+	if (nl >= 0)
+	{
+		if (code == 0)
+		{
+			out = malloc(sizeof(char) * (nl + 2));
+			while (i <= nl)
+			{
+				out[i] = line[i];
+				i++;
+			}
+			out[i] = '\0';
+		}
+		else
+		{
+			i = nl + 1;
+			out = malloc(sizeof(char) * (ft_strlen(line) - nl + 2));
+			while (i < ft_strlen(line))
+			{
+				out[i - (nl + 1)] = line[i];
+				i++;
+			}
+			free(line);
+			out[i - (nl + 1)] = '\0';
+		}
+		return (out);
+	}
+	return (NULL);
 }
 
 char	*get_next_line(int fd)
 {
-	/*static char	*buffer = NULL;
-	char		*line;
-	ssize_t		read_bytes;
-	static int	i;
-	int	j = 0;
-	static int	flip = 0;
-
-	if (!buffer)
-	{
-		buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-		read_bytes = read(fd, buffer, BUFFER_SIZE);
-		buffer[read_bytes] = '\0';
-	}
-	while (buffer[i] != '\0' && buffer[i] != '\n')
-	{
-		j++;
-		i++;
-	}
-	i++;
-	line = malloc(sizeof(char) * j + 1);
-	line = ft_strcpy(line, &buffer[flip]);
-	flip = i;
-	return (line);*/
-
-	char	*buffer;
-	static char	*line = NULL;
+	char		*out;
+	static char	*line;
+	char		*buf;
 	ssize_t		read_bytes;
 
+	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
+		return (NULL);
 	read_bytes = BUFFER_SIZE;
-	while (read_bytes == BUFFER_SIZE && line[i] != '\n')
+	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	buf[0] = '\0';
+	while (read_bytes <= BUFFER_SIZE && nl_idx(buf) < 0)
 	{
-		if (!buffer)
+		read_bytes = read(fd, buf, BUFFER_SIZE);
+		if (read_bytes <= 0)
 		{
-			buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-			read_bytes = read(fd, buffer, BUFFER_SIZE);
-			buffer[read_bytes] = '\0';
+			free(buf);
+			return (NULL);
 		}
-		line = join buffer et line
-		i++;
+		buf[read_bytes] = '\0';
+		line = ft_strjoin(line, buf);
 	}
+	free(buf);
+	if (nl_idx(line) == -1)
+		return (line);
+	out = clear_and_return(line, 0);
+	line = clear_and_return(line, 1);
+	return (out);
 }
 
-#include <stdio.h>
 #include <fcntl.h>
+#include <stdio.h>
 
-int main(void)
+int	main(void)
 {
-	int		fd;
-	int		i = 1;
-	char	*line;
+	int	fd;
 
 	fd = open("test.txt", O_RDONLY);
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s", line);
-		free(line);
-		line = NULL;
-		i++;
-	}
-	printf("%s", line);
-	free(line);
-	return(0);
+	printf("%s", get_next_line(fd));
+	close(fd);
 }
