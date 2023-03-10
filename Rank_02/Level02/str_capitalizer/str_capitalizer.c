@@ -6,16 +6,18 @@
 /*   By: laprieur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 14:30:16 by laprieur          #+#    #+#             */
-/*   Updated: 2023/03/09 17:05:42 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:30:30 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	ft_isalpha(int c)
+int	ft_isalpha_blank(int c)
 {
 	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
 		return (1);
+	if (c == ' ' || c == '\t')
+		return (2);
 	return (0);
 }
 
@@ -26,12 +28,17 @@ void	str_capitalizer(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if ((str[i - 1] == ' ' || str[i - 1] == '\t')
-			&& (str[i] >= 'a' && str[i] <= 'z')
-			&& ft_isalpha(str[i + 1]) == 1)
-			str[i] -= 32;
-		else if ((str[i] >= 'A' && str[i] <= 'Z') && (ft_isalpha(str[i + 1]) == 1 || str[i + 1] == ' ' || str[i + 1] == '\t' || str[i + 1] == '\0'))
+		if ((ft_isalpha_blank(str[i - 1]) == 0
+				|| ft_isalpha_blank(str[i - 1]) == 1)
+			&& (str[i] >= 'A' && str[i] <= 'Z')
+			&& (ft_isalpha_blank(str[i + 1]) == 1
+				|| ft_isalpha_blank(str[i + 1]) == 2 || str[i + 1] == '\0'))
 			str[i] += 32;
+		else if ((i == 0 || ft_isalpha_blank(str[i - 1]) == 2)
+			&& (str[i] >= 'a' && str[i] <= 'z')
+			&& (ft_isalpha_blank(str[i + 1]) == 1 || str[i + 1] == '\0'
+				|| i == 0))
+			str[i] -= 32;
 		write(1, &str[i], 1);
 		i++;
 	}
