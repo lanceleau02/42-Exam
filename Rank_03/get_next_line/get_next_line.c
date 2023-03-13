@@ -1,129 +1,114 @@
-#include "get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: laprieur <laprieur@student.42angouleme.fr  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/13 21:29:53 by laprieur          #+#    #+#             */
+/*   Updated: 2023/03/13 21:42:55 by lprieure         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	ft_strlen(char *str)
+#include <stdlib.h>
+#include <unistd.h>
+
+int	nl_in_str(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str && str[i])
-		i++;
-	return (i);
-}
-
-int	nl_idx(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (-2);
-	while (str && str[i] && str[i] != '\n')
-		i++;
-	if (str[i] == '\0')
-		return (-1);
-	return (i);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*str;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
-	if (!str)
-		return (NULL);
-	while (s1 && s1[i])
+	while (str != NULL && str[i] != '\0')
 	{
-		str[i] = s1[i];
+		if (str[i] == '\n')
+			return (1);
 		i++;
 	}
-	while (s2[j])
-		str[i++] = s2[j++];
+	return (0);
+}
+
+char	*join(char *line, char *buf)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	i = 0;
+	while (line != NULL && line[i] != '\0')
+		i++;
+	str = malloc(sizeof(char) * (i + BUFFER_SIZE + 1));
+	i = 0;
+	while (line != NULL && line[i] != '\0')
+	{
+		str[i] = line[i];
+		i++;
+	}
+	j = 0;
+	while (buf[j] != '\0')
+	{
+		str[i] = buf[j];
+		i++;
+		j++;
+	}
 	str[i] = '\0';
-	if (s1)
-		free(s1);
+	free(line);
 	return (str);
 }
 
-char	*clear_and_return(char *line, int code)
+int	cut(char *line, char **buf)
 {
-	int		i;
-	int		nl;
-	char	*out;
+	int	i;
+	int	j;
 
 	i = 0;
-	nl = nl_idx(line);
-	if (nl >= 0)
+	while (line[i] != '\0' && line[i] != '\n')
+		i++;
+	*buf = malloc(sizeof(char) * (i + 2));
+	j = 0;
+	while (j <= i)
 	{
-		if (code == 0)
-		{
-			out = malloc(sizeof(char) * (nl + 2));
-			while (i <= nl)
-			{
-				out[i] = line[i];
-				i++;
-			}
-			out[i] = '\0';
-		}
-		else
-		{
-			i = nl + 1;
-			out = malloc(sizeof(char) * (ft_strlen(line) - nl + 2));
-			while (i < ft_strlen(line))
-			{
-				out[i - (nl + 1)] = line[i];
-				i++;
-			}
-			free(line);
-			out[i - (nl + 1)] = '\0';
-		}
-		return (out);
+		(*buf)[j] = line[j];
+		j++;
 	}
-	return (NULL);
+	(*buf)[j] = '\0';
+	if (nl_in_str(line) == 0 || line[j] == '\0')
+		return (1);
+	i = 0;
+	while (line[j] != '\0')
+	{
+		line[i] = line[j];
+		i++;
+		j++;
+	}
+	line[i] = '\0';
+	return (0);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*out;
-	static char	*line;
 	char		*buf;
-	ssize_t		read_bytes;
+	int			read_bytes;
+	static char	*line = NULL;
 
-	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
-		return (NULL);
-	read_bytes = BUFFER_SIZE;
-	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	buf[0] = '\0';
-	while (read_bytes <= BUFFER_SIZE && nl_idx(buf) < 0)
+	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	while (1)
 	{
 		read_bytes = read(fd, buf, BUFFER_SIZE);
 		if (read_bytes <= 0)
-		{
-			free(buf);
-			return (NULL);
-		}
+			break ;
 		buf[read_bytes] = '\0';
-		line = ft_strjoin(line, buf);
+		line = join(line, buf);
+		if (nl_in_str(line) == 1)
+			break ;
 	}
 	free(buf);
-	if (nl_idx(line) == -1)
-		return (line);
-	out = clear_and_return(line, 0);
-	line = clear_and_return(line, 1);
-	return (out);
-}
-
-#include <fcntl.h>
-#include <stdio.h>
-
-int	main(void)
-{
-	int	fd;
-
-	fd = open("test.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
-	close(fd);
+	buf = NULL;
+	if (line != NULL)
+		read_bytes = cut(line, &buf);
+	if (read_bytes == 1)
+	{
+		free(line);
+		line = NULL;
+	}
+	return (buf);
 }

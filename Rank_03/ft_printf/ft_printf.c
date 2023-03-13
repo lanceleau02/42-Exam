@@ -6,28 +6,28 @@
 /*   By: lprieure <lprieure@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 14:15:05 by lprieure          #+#    #+#             */
-/*   Updated: 2023/03/05 15:57:42 by lprieure         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:52:27 by lprieure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdarg.h>
 
-static void	ft_putstr(char *str, int *size)
+void	ft_putstr(char *str, int *size)
 {
 	int	i;
 
 	if (str == NULL)
 		str = "(null)";
 	i = 0;
-	while (str[i])
+	while (str[i] != '\0')
 	{
 		*size += write(1, &str[i], 1);
 		i++;
 	}
 }
 
-static void	ft_putnbr_base(long int n, int base, int *size)
+void	ft_putnbr_base(long int n, int base, int *size)
 {
 	char	base_hex[] = "0123456789abcdef";
 
@@ -52,7 +52,7 @@ int	ft_printf(const char *format, ...)
 	va_start(ap, format);
 	i = 0;
 	size = 0;
-	while (format[i])
+	while (format[i] != '\0')
 	{
 		if (format[i] == '%' && format[i + 1] != '\0')
 		{
