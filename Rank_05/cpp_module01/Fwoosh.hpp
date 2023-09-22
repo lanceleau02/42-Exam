@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   Fwoosh.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laprieur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 10:46:45 by laprieur          #+#    #+#             */
-/*   Updated: 2023/03/13 11:05:03 by laprieur         ###   ########.fr       */
+/*   Created: 2023/09/22 10:04:28 by laprieur          #+#    #+#             */
+/*   Updated: 2023/09/22 10:47:55 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef FWOOSH_HPP
+# define FWOOSH_HPP
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+#include "ASpell.hpp"
 
-# include <stdlib.h>
-# include <unistd.h>
-
-char	*get_next_line(int fd);
+class Fwoosh : public ASpell {
+	public:
+		Fwoosh();
+		
+		virtual ASpell*	clone() const;
+};
 
 #endif

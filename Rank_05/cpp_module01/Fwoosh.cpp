@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   Fwoosh.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laprieur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 10:46:45 by laprieur          #+#    #+#             */
-/*   Updated: 2023/03/13 11:05:03 by laprieur         ###   ########.fr       */
+/*   Created: 2023/09/22 10:12:43 by laprieur          #+#    #+#             */
+/*   Updated: 2023/09/22 11:07:27 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "Fwoosh.hpp"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
-# include <stdlib.h>
-# include <unistd.h>
-
-char	*get_next_line(int fd);
-
-#endif
+Fwoosh::Fwoosh() {
+	_name = "Fwoosh";
+	_effects = "fwooshed"; 
+}
+		
+ASpell*	Fwoosh::clone() const {
+	ASpell*	clone = new Fwoosh();
+	return clone;
+}

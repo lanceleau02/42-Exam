@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   Dummy.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laprieur <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 10:46:45 by laprieur          #+#    #+#             */
-/*   Updated: 2023/03/13 11:05:03 by laprieur         ###   ########.fr       */
+/*   Created: 2023/09/22 10:18:17 by laprieur          #+#    #+#             */
+/*   Updated: 2023/09/22 10:54:51 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef DUMMY_HPP
+# define DUMMY_HPP
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+#include "ATarget.hpp"
 
-# include <stdlib.h>
-# include <unistd.h>
-
-char	*get_next_line(int fd);
+class Dummy : public ATarget {
+	public:
+		Dummy();
+		
+		virtual ATarget*	clone() const;
+};
 
 #endif
