@@ -3,6 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: laprieur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:17:09 by laprieur          #+#    #+#             */
@@ -13,20 +14,43 @@
 #include "get_next_line.h"
 
 static int	nl_in_str(char *s)
+=======
+/*   By: laprieur <laprieur@student.42angouleme.fr  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/13 21:29:53 by laprieur          #+#    #+#             */
+/*   Updated: 2023/03/13 21:42:55 by lprieure         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdlib.h>
+#include <unistd.h>
+
+int	nl_in_str(char *str)
+>>>>>>> 681e2413aab191f874f00d3ebcbbd4b142184866
 {
 	int	i;
 
 	i = 0;
+<<<<<<< HEAD
 	while (s != NULL && s[i] != '\0')
 	{
 		if (s[i] == '\n')
+=======
+	while (str != NULL && str[i] != '\0')
+	{
+		if (str[i] == '\n')
+>>>>>>> 681e2413aab191f874f00d3ebcbbd4b142184866
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
+<<<<<<< HEAD
 static char	*join(char *line, char *buf)
+=======
+char	*join(char *line, char *buf)
+>>>>>>> 681e2413aab191f874f00d3ebcbbd4b142184866
 {
 	int		i;
 	int		j;
@@ -54,7 +78,11 @@ static char	*join(char *line, char *buf)
 	return (str);
 }
 
+<<<<<<< HEAD
 static int	cut(char *line, char **buf)
+=======
+int	cut(char *line, char **buf)
+>>>>>>> 681e2413aab191f874f00d3ebcbbd4b142184866
 {
 	int	i;
 	int	j;
