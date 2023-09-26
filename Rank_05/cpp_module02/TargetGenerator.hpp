@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dummy.hpp                                          :+:      :+:    :+:   */
+/*   TargetGenerator.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 10:18:17 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/25 15:09:10 by laprieur         ###   ########.fr       */
+/*   Created: 2023/09/26 16:44:03 by laprieur          #+#    #+#             */
+/*   Updated: 2023/09/26 17:18:41 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DUMMY_HPP
-# define DUMMY_HPP
+#ifndef TARGETGENERATOR_HPP
+# define TARGETGENERATOR_HPP
+
+#include <vector>
 
 #include "ATarget.hpp"
 
-class Dummy : public ATarget {
+class TargetGenerator {
+	private:
+		std::vector<ATarget*>	_targets;
+		TargetGenerator(const TargetGenerator& source);
+		TargetGenerator& operator=(const TargetGenerator& source);
+
 	public:
-		Dummy();
-		~Dummy();
-		
-		virtual ATarget*	clone() const;
+		TargetGenerator();
+		~TargetGenerator();
+
+		void		learnTargetType(ATarget* type);
+		void		forgetTargetType(std::string const &type);
+		ATarget*	createTarget(std::string const &type);
 };
 
 #endif

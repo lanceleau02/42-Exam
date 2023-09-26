@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 09:09:17 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/26 14:59:46 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:38:25 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 
 #include "ASpell.hpp"
 #include "ATarget.hpp"
+#include "SpellBook.hpp"
 
 class Warlock {
 	private:
 		std::string				_name;
 		std::string				_title;
-		std::vector<ASpell*>	_spells;
+		SpellBook				_spellBook;
 		Warlock();
 		Warlock(const Warlock& source);
 		Warlock& operator=(const Warlock& source);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fwoosh.hpp                                         :+:      :+:    :+:   */
+/*   Fireball.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FWOOSH_HPP
-# define FWOOSH_HPP
+#ifndef FIREBALL_HPP
+# define FIREBALL_HPP
 
 #include "ASpell.hpp"
 
-class Fwoosh : public ASpell {
+class Fireball : public ASpell {
 	public:
-		Fwoosh();
-		~Fwoosh();
+		Fireball();
+		~Fireball();
 		
 		virtual ASpell*	clone() const;
 };

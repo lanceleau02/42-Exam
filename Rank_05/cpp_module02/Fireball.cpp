@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fwoosh.hpp                                         :+:      :+:    :+:   */
+/*   Fireballll.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 10:04:28 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/25 15:09:44 by laprieur         ###   ########.fr       */
+/*   Created: 2023/09/22 10:12:43 by laprieur          #+#    #+#             */
+/*   Updated: 2023/09/26 15:47:15 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FWOOSH_HPP
-# define FWOOSH_HPP
+#include "Fireball.hpp"
 
-#include "ASpell.hpp"
+Fireball::Fireball() : ASpell("Fireball", "burnt to a crisp") {}
 
-class Fwoosh : public ASpell {
-	public:
-		Fwoosh();
-		~Fwoosh();
+Fireball::~Fireball() {}
 		
-		virtual ASpell*	clone() const;
-};
-
-#endif
+ASpell*	Fireball::clone() const {
+	ASpell*	clone = new Fireball();
+	return clone;
+}

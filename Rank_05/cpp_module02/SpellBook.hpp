@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fwoosh.hpp                                         :+:      :+:    :+:   */
+/*   SpellBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 10:04:28 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/25 15:09:44 by laprieur         ###   ########.fr       */
+/*   Created: 2023/09/26 15:53:38 by laprieur          #+#    #+#             */
+/*   Updated: 2023/09/26 17:18:34 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FWOOSH_HPP
-# define FWOOSH_HPP
+#ifndef SPELLBOOK_HPP
+# define SPELLBOOK_HPP
+
+#include <vector>
 
 #include "ASpell.hpp"
 
-class Fwoosh : public ASpell {
+class SpellBook {
+	private:
+		std::vector<ASpell*>	_spells;
+		SpellBook(const SpellBook& source);
+		SpellBook& operator=(const SpellBook& source);
+	
 	public:
-		Fwoosh();
-		~Fwoosh();
-		
-		virtual ASpell*	clone() const;
+		SpellBook();
+		~SpellBook();
+
+		void	learnSpell(ASpell* spell);
+		void	forgetSpell(std::string const &spell);
+		ASpell*	createSpell(std::string const &spell);
 };
 
 #endif
