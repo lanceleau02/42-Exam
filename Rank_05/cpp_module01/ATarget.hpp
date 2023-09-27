@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 09:50:31 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/25 15:02:32 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:49:59 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class ASpell;
 
 class ATarget {
 	protected:
-		std::string	type;
+		std::string	_type;
 
 	public:
 		ATarget();

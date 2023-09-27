@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 09:38:31 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/26 13:06:27 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:49:09 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ class ATarget;
 
 class ASpell {
 	protected:
-		std::string	name;
-		std::string	effects;
+		std::string	_name;
+		std::string	_effects;
 	
 	public:
 		ASpell();
@@ -35,7 +35,7 @@ class ASpell {
 		const std::string&	getName() const;
 		const std::string&	getEffects() const;
 		virtual ASpell*		clone() const = 0;
-		void				launch(const ATarget& param);
+		void				launch(const ATarget& target);
 };
 
 #endif

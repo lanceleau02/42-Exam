@@ -17,6 +17,5 @@ Polymorph::Polymorph() : ASpell("Polymorph", "turned into a critter") {}
 Polymorph::~Polymorph() {}
 		
 ASpell*	Polymorph::clone() const {
-	ASpell*	clone = new Polymorph();
-	return clone;
+	return (new Polymorph());
 }

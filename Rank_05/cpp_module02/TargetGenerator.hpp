@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:44:03 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/26 17:18:41 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:59:46 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 class TargetGenerator {
 	private:
 		std::vector<ATarget*>	_targets;
+		
 		TargetGenerator(const TargetGenerator& source);
 		TargetGenerator& operator=(const TargetGenerator& source);
 

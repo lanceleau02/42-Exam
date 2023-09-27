@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 09:09:17 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/26 16:38:25 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:00:09 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class Warlock {
 		std::string				_name;
 		std::string				_title;
 		SpellBook				_spellBook;
+		
 		Warlock();
 		Warlock(const Warlock& source);
 		Warlock& operator=(const Warlock& source);

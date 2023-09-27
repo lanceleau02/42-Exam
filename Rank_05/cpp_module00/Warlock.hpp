@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 09:09:17 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/22 09:28:59 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:45:26 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ class Warlock {
 	private:
 		std::string	_name;
 		std::string	_title;
+		
 		Warlock();
 		Warlock(const Warlock& source);
 		Warlock& operator=(const Warlock& source);

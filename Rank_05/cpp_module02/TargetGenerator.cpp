@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:47:27 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/26 17:38:34 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:59:37 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,14 @@ void		TargetGenerator::learnTargetType(ATarget* type) {
 }
 
 void		TargetGenerator::forgetTargetType(std::string const &type) {
-	for (size_t i = 0; i < _targets.size(); i++) {
+	for (size_t i = 0; i < _targets.size(); i++)
 		if (_targets[i] != NULL && _targets[i]->getType() == type)
 			delete _targets[i];
-	}
 }
 
 ATarget*	TargetGenerator::createTarget(std::string const &type) {
-	for (size_t i = 0; i < _targets.size(); i++) {
+	for (size_t i = 0; i < _targets.size(); i++)
 		if (_targets[i] != NULL && _targets[i]->getType() == type)
 			return _targets[i];
-	}
 	return NULL;
 }

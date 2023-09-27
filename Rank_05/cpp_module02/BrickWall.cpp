@@ -17,6 +17,5 @@ BrickWall::BrickWall() : ATarget("Inconspicuous Red-brick Wall") {}
 BrickWall::~BrickWall() {}
 		
 ATarget*	BrickWall::clone() const {
-	ATarget*	clone = new BrickWall();
-	return clone;
+	return (new BrickWall());
 }

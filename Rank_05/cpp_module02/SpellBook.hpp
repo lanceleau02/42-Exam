@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 15:53:38 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/26 17:18:34 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:59:18 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 class SpellBook {
 	private:
 		std::vector<ASpell*>	_spells;
+		
 		SpellBook(const SpellBook& source);
 		SpellBook& operator=(const SpellBook& source);
 	
