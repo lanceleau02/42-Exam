@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 09:45:18 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/27 09:49:44 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:43:42 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ ASpell::ASpell(const ASpell& source) {
 }
 
 ASpell& ASpell::operator=(const ASpell& source) {
-	_name = source._name;
-	_effects = source._effects;
+	if (this != &source) {
+		_name = source._name;
+		_effects = source._effects;
+	}
 	return *this;
 }
 

@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 09:15:47 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/26 17:31:48 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:21:13 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void				Warlock::introduce() const {
 }
 
 void				Warlock::learnSpell(ASpell* spell) {
-	_spellBook.learnSpell(spell);
+	if (spell != NULL)
+		_spellBook.learnSpell(spell);
 }
 
 void				Warlock::forgetSpell(std::string spellName) {
@@ -46,5 +47,6 @@ void				Warlock::forgetSpell(std::string spellName) {
 
 void				Warlock::launchSpell(std::string spellName, const ATarget& target) {
 	ASpell*	tmp = _spellBook.createSpell(spellName);
-	tmp->launch(target);
+	if (tmp != NULL)
+		tmp->launch(target);
 }

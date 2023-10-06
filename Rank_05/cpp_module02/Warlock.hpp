@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 09:09:17 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/27 10:00:09 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:21:04 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
 
 #include "ASpell.hpp"
 #include "ATarget.hpp"

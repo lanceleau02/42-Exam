@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 09:15:47 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/27 09:54:47 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:14:42 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 Warlock::Warlock(const std::string& name, const std::string& title) : _name(name), _title(title) {
 	std::cout << _name << ": This looks like another boring day." << std::endl;
+	for (size_t i = 0; i < _spells.size(); i++)
+			_spells[i] = NULL;
 }
 
 Warlock::~Warlock() {
 	std::cout << _name << ": My job here is done!" << std::endl;
-	for (size_t i = 0; i < _spells.size(); i++)
-		if (_spells[i] != NULL)
+	for (size_t i = 0; i < _spells.size(); i++) {
+		if (_spells[i] != NULL) {
 			delete _spells[i];
+			_spells[i] = NULL;
+		}
+	}
 }
 
 const std::string&	Warlock::getName() const {
@@ -40,7 +45,8 @@ void				Warlock::introduce() const {
 }
 
 void				Warlock::learnSpell(ASpell* spell) {
-	_spells.push_back(spell);
+	if (spell != NULL)
+		_spells.push_back(spell);
 }
 
 void				Warlock::forgetSpell(std::string spellName) {
@@ -52,5 +58,5 @@ void				Warlock::forgetSpell(std::string spellName) {
 void				Warlock::launchSpell(std::string spellName, const ATarget& target) {
 	for (size_t i = 0; i < _spells.size(); i++)
 		if (_spells[i] != NULL && _spells[i]->getName() == spellName)
-			target.getHitBySpell(*_spells[i]);
+			_spells[i]->launch(target);
 }

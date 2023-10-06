@@ -6,14 +6,13 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 09:38:31 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/27 09:49:09 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:04:38 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASPELL_HPP
 # define ASPELL_HPP
 
-#include <iostream>
 #include <string>
 
 #include "ATarget.hpp"

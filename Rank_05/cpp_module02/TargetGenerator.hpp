@@ -6,13 +6,14 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:44:03 by laprieur          #+#    #+#             */
-/*   Updated: 2023/09/27 09:59:46 by laprieur         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:06:00 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TARGETGENERATOR_HPP
 # define TARGETGENERATOR_HPP
 
+#include <string>
 #include <vector>
 
 #include "ATarget.hpp"
@@ -29,8 +30,8 @@ class TargetGenerator {
 		~TargetGenerator();
 
 		void		learnTargetType(ATarget* type);
-		void		forgetTargetType(std::string const &type);
-		ATarget*	createTarget(std::string const &type);
+		void		forgetTargetType(const std::string& targetType);
+		ATarget*	createTarget(const std::string& targetType);
 };
 
 #endif
